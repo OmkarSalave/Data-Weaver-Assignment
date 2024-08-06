@@ -46,7 +46,6 @@ export default function AntdConfig({ children }) {
             controlHeight: 40,
             borderRadius: 10,
           },
-
           Button: {
             controlHeight: 40,
             controlHeightLG: 50,

@@ -1,7 +1,7 @@
 import { Button, Col, Flex, message, Row, Select, Table } from "antd";
 import SearchComponent from "./list-comps/search";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { GET_BOOKS } from "./api-helper/helper";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -49,14 +49,14 @@ export default function BooksList() {
       })
     );
   };
-  const isFirstRender = useRef(true);
+  // const isFirstRender = useRef(true);
 
   useEffect(() => {
-    if (!isFirstRender.current) {
-      fetchBooks(pagination.current, pagination.pageSize, search, sort);
-    } else {
-      isFirstRender.current = false;
-    }
+    // if (!isFirstRender.current) {
+    fetchBooks(pagination.current, pagination.pageSize, search, sort);
+    // } else {
+    //   isFirstRender.current = false;
+    // }
   }, [pagination.current, pagination.pageSize, search, sort]);
 
   return (
