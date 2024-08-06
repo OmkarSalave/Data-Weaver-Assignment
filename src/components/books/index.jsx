@@ -1,7 +1,7 @@
 import { Button, Col, Flex, message, Row, Select, Table } from "antd";
 import SearchComponent from "./list-comps/search";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { GET_BOOKS } from "./api-helper/helper";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -22,9 +22,9 @@ export default function BooksList() {
   const search = useSelector((state) => state.books.search);
   const sort = useSelector((state) => state.books.sort);
 
-  async function booksGet(page, pageSize, searchA, sortA) {
+  const fetchBooks = async (page, pageSize, searchA, sortA) => {
+    dispatch(setLoading(true));
     try {
-      dispatch(setLoading(true));
       const res = await GET_BOOKS(page, pageSize, searchA, sortA);
       dispatch(
         setPagination({
@@ -33,13 +33,12 @@ export default function BooksList() {
         })
       );
       dispatch(setBooksData(res?.data ?? []));
-      dispatch(setLoading(false));
     } catch (error) {
       message.error(error.message);
     } finally {
       dispatch(setLoading(false));
     }
-  }
+  };
 
   const handleTableChange = (mypagination) => {
     dispatch(
@@ -50,14 +49,19 @@ export default function BooksList() {
       })
     );
   };
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
-    booksGet(pagination.current, pagination.pageSize, search, sort);
+    if (!isFirstRender.current) {
+      fetchBooks(pagination.current, pagination.pageSize, search, sort);
+    } else {
+      isFirstRender.current = false;
+    }
   }, [pagination.current, pagination.pageSize, search, sort]);
 
   return (
     <ErrorBoundry>
-      <div className="conatiner">
+      <div className="container">
         <Row gutter={[8, 8]}>
           <Col span={24}>
             <h1 className="title">Books List</h1>

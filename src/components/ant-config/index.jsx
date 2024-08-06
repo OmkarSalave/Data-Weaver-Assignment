@@ -46,15 +46,7 @@ export default function AntdConfig({ children }) {
             controlHeight: 40,
             borderRadius: 10,
           },
-          Switch: {
-            controlHeight: 40,
-          },
-          Checkbox: {
-            controlHeight: 40,
-          },
-          Radio: {
-            controlHeight: 40,
-          },
+
           Button: {
             controlHeight: 40,
             controlHeightLG: 50,

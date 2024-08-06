@@ -28,6 +28,7 @@ export default function BookCreate() {
   const formLoader = useSelector((state) => state.books.formLoader);
   const onSubmit = async (values) => {
     if (updateId) {
+      dispatch(setFormLoader(true));
       try {
         const res = await PUT_BOOKS(updateId, {
           ...values,
@@ -43,6 +44,7 @@ export default function BookCreate() {
         dispatch(setFormLoader(false));
       }
     } else {
+      dispatch(setFormLoader(true));
       try {
         const res = await POST_BOOKS({
           ...values,
@@ -73,7 +75,7 @@ export default function BookCreate() {
 
   return (
     <ErrorBoundry>
-      <div className="conatiner">
+      <div className="container">
         <Row gutter={[8, 8]}>
           <Col span={24}>
             <h1 className="title">
@@ -221,7 +223,6 @@ export default function BookCreate() {
                 <Button
                   loading={formLoader}
                   disabled={formLoader}
-                  onClick={() => dispatch(setFormLoader(false))}
                   size="large"
                   type="primary"
                   htmlType="submit"

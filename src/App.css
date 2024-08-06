@@ -2,10 +2,18 @@
   margin: 0;
   padding: 0;
 }
-
-.conatiner {
+.nav-container {
+  width: 100%;
+  padding: 0px 10px;
+}
+.container {
   width: 100%;
   padding: 50px 10px;
+}
+.logoname {
+  font-size: clamp(18px, 5vw, 25px);
+  font-weight: 700;
+  margin-bottom: 0px;
 }
 .title {
   font-size: clamp(20px, 5vw, 30px);
@@ -14,17 +22,26 @@
 }
 
 @media screen and (min-width: 550px) and (max-width: 768px) {
-  .conatiner {
+  .nav-container {
+    padding: 0px 40px;
+  }
+  .container {
     padding: 40px;
   }
 }
 @media screen and (min-width: 768px) and (max-width: 1024px) {
-  .conatiner {
+  .nav-container {
+    padding: 0px 50px;
+  }
+  .container {
     padding: 50px;
   }
 }
 @media screen and (min-width: 1024px) {
-  .conatiner {
+  .nav-container {
+    padding: 0px 80px;
+  }
+  .container {
     padding: 80px;
   }
 }
